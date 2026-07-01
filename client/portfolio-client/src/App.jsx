@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import "./index.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 function App() {
   const [projects, setProjects] = useState([]);
   const [formData, setFormData] = useState({
@@ -10,7 +13,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/projects")
+    fetch(`${API_URL}/projects`)
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch((err) => console.error(err));
@@ -26,7 +29,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/contact", {
+    const response = await fetch(`${API_URL}/contact`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
